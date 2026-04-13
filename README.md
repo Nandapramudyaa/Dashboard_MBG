@@ -1,5 +1,3 @@
-import os
-
 # Konten README.md berdasarkan analisis file proyek
 readme_content = """# 📊 Dashboard MBG Analytics
 
