@@ -294,7 +294,7 @@ elif selected == "Data Preprocessing":
         query = st.text_input("🔍 Cari Keyword pada Teks Asli:")
         df_safe = df.fillna("")
         res = df_safe[df_safe['full_text'].str.contains(query, case=False)] if query else df_safe
-        st.dataframe(res[['waktu_tweet', 'full_text', 'step_6_final', 'Topic']].head(500), use_container_width=True)
+        st.dataframe(res[['Waktu', 'Data Sebelum Preprocessing', 'Data Sesudah Preprocessing', 'TopiK']].head(500), use_container_width=True)
 
     with tab_prep:
         st.subheader("Transformasi Teks (Before - After)")
@@ -303,11 +303,11 @@ elif selected == "Data Preprocessing":
                 df[['full_text', 'step_2_cleaning', 'step_4_str', 'step_5_stemmed', 'step_6_final']].head(100), 
                 use_container_width=True,
                 column_config={
-                    "full_text": "1. Asli (Kotor)",
+                    "full_text": "1. Data Asli",
                     "step_2_cleaning": "2. Cleaning",
                     "step_4_str": "3. Normalisasi",
                     "step_5_stemmed": "4. Stemming",
-                    "step_6_final": "5. Final (Siap Model)"
+                    "step_6_final": "5. Data Final"
                 }
             )
         else:
