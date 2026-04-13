@@ -294,20 +294,32 @@ elif selected == "Data Preprocessing":
         query = st.text_input("🔍 Cari Keyword pada Teks Asli:")
         df_safe = df.fillna("")
         res = df_safe[df_safe['full_text'].str.contains(query, case=False)] if query else df_safe
-        st.dataframe(res[['Waktu', 'Data Sebelum Preprocessing', 'Data Sesudah Preprocessing', 'TopiK']].head(500), use_container_width=True)
+        
+        # Menerapkan column_config untuk mengubah nama kolom hanya pada tampilannya
+        st.dataframe(
+            res[['waktu_tweet', 'full_text', 'step_6_final', 'Topic']].head(500), 
+            use_container_width=True,
+            column_config={
+                "waktu_tweet": "Waktu Tweet",
+                "full_text": "Data Sebelum Preprocessing",
+                "step_6_final": "Data Sesudah Preprocessing",
+                "Topic": "Topik"
+            }
+        )
 
     with tab_prep:
         st.subheader("Transformasi Teks (Before - After)")
         if 'step_2_cleaning' in df.columns:
+            # Menerapkan column_config untuk tabel jejak preprocessing
             st.dataframe(
                 df[['full_text', 'step_2_cleaning', 'step_4_str', 'step_5_stemmed', 'step_6_final']].head(100), 
                 use_container_width=True,
                 column_config={
-                    "full_text": "1. Data Asli",
-                    "step_2_cleaning": "2. Cleaning",
-                    "step_4_str": "3. Normalisasi",
-                    "step_5_stemmed": "4. Stemming",
-                    "step_6_final": "5. Data Final"
+                    "full_text": "Data Sebelum Preprocessing",
+                    "step_2_cleaning": "Tahap 1 (Cleaning)",
+                    "step_4_str": "Tahap 2 (Normalisasi)",
+                    "step_5_stemmed": "Tahap 3 (Stemming)",
+                    "step_6_final": "Data Sesudah Preprocessing"
                 }
             )
         else:
